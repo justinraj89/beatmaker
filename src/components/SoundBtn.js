@@ -5,9 +5,9 @@ function SoundBtn({ keyChar, soundFile, sound }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handleButtonClick = () => {
+    setIsPlaying(true);
     audio.currentTime = 0;
     audio.play();
-    setIsPlaying(true);
     setTimeout(() => setIsPlaying(false), 110);
   };
 
