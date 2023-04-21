@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import SoundBtn from "./components/SoundBtn";
 import Footer from "./components/Footer";
+import { SoundData } from "./utils/SoundData";
 
 function App() {
   const [audioState, setAudioState] = useState({ audio: null, playing: false });
-  
 
   useEffect(() => {
-    const audio = new Audio('/sounds/gameovernodrums.wav');
+    const audio = new Audio("/sounds/gameovernodrums.wav");
     audio.loop = true;
     setAudioState({ audio: audio, playing: false });
 
@@ -35,25 +35,24 @@ function App() {
       <h2 className="hidden lg:block text-gray-100 font-mono pb-8 text-2xl">
         Press the keys on your keyboard
       </h2>
-      
+
       <div className="flex flex-wrap items-center justify-center lg:flex gap-4 lg:gap-3">
-        <SoundBtn keyChar="a" soundFile="/sounds/boom.wav" sound="808" shadowId='shadow-red-600' />
-        <SoundBtn keyChar="s" soundFile="/sounds/kick.wav" sound="kick" shadowId='shadow-blue-600' />
-        <SoundBtn keyChar="d" soundFile="/sounds/hihat.wav" sound="hihat" shadowId='shadow-green-600'/>
-        <SoundBtn keyChar="f" soundFile="/sounds/yeaho.wav" sound="🔥" shadowId='shadow-orange-600'/>
-        <SoundBtn keyChar="g" soundFile="/sounds/openhat.wav" sound="openhat" shadowId='shadow-emerald-600'/>
-        <SoundBtn keyChar="h" soundFile="/sounds/clap.wav" sound="clap" shadowId='shadow-yellow-600'/>
-        <SoundBtn keyChar="j" soundFile="/sounds/snare.wav" sound="snare" shadowId='shadow-blue-600'/>
-        <SoundBtn keyChar="k" soundFile="/sounds/tink.wav" sound="tink" shadowId='shadow-yellow-600'/>
-        <SoundBtn keyChar="l" soundFile="/sounds/tom.wav" sound="tom" shadowId='shadow-red-600'/>
+        {SoundData.map((sound) => (
+          <SoundBtn
+            keyChar={sound.keyChar}
+            soundFile={sound.soundFile}
+            sound={sound.soundDesc}
+            shadowId={sound.shadowId}
+            key={sound.id}
+          />
+        ))}
       </div>
-      <button className={`text-white font-mono mt-8 p-3 text-lg rounded-lg focus:outline-none bg-gradient-to-r from-blue-400 to-blue-500`} onClick={toggleAudio}>{audioState.playing ? 'Pause' : 'Play a melody?'}</button>
-      {/* <div className="flex flex-wrap items-center justify-center lg:flex gap-4 lg:gap-2">
-        <SoundBtn keyChar="c" soundFile="/sounds/boom.wav" sound="808" />
-        <SoundBtn keyChar="v" soundFile="/sounds/kick.wav" sound="kick" />
-        <SoundBtn keyChar="b" soundFile="/sounds/hihat.wav" sound="hihat" />
-        
-      </div> */}
+      <button
+        className={`text-white font-mono mt-8 p-3 text-lg rounded-lg focus:outline-none bg-gradient-to-r from-blue-400 to-blue-500`}
+        onClick={toggleAudio}
+      >
+        {audioState.playing ? "Pause" : "Play a melody?"}
+      </button>
       <Footer />
     </main>
   );
