@@ -1,6 +1,6 @@
 # Simple beatmaker app. Self explanatory.
 
-## Try it out here [here](https://dictionary-nextjs.herokuapp.com/)
+## Try it out here [here](https://beat-maker.herokuapp.com/)
 
 
 ## Screenshots
